@@ -1,1 +1,924 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Baildon Fantasy</title>
 
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+  //import { useState } from “react”;
+
+const LOGO = “data:image/jpeg;base64,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”;
+const BUDGET = 75;
+const STORE = “bcc_v8”;
+const APWD = “Qwerty067”;
+const PCURL = “https://baildon.play-cricket.com/Matches”;
+const PUR = “#37003c”;
+const HGRAD = “linear-gradient(135deg,#37003c 0%,#1a0030 35%,#04006b 65%,#00adb5 100%)”;
+const PGRAD = “linear-gradient(135deg,#37003c,#04006b)”;
+
+const PLAYERS = [
+// ── 1st XI ─────────────────────────────────────────────────────
+{id:1,  name:“Brendan Palmer”,       team:“1st XI”, role:“Batter”,  val:8.0},
+{id:2,  name:“Will Kelly”,           team:“1st XI”, role:“Batter”,  val:9.5},
+{id:3,  name:“Jonny Reynolds”,       team:“1st XI”, role:“Batter”,  val:8.0},
+{id:4,  name:“James Skingle”,        team:“1st XI”, role:“Keeper”,  val:9.5},
+{id:5,  name:“Aryan Singh”,          team:“1st XI”, role:“Batter”,  val:8.0},
+{id:6,  name:“Kamario Grant”,        team:“1st XI”, role:“Batter”,  val:8.0},
+{id:7,  name:“Seif Hussain”,         team:“1st XI”, role:“AR”,      val:9.5},
+{id:8,  name:“Saqif Ridwan”,         team:“1st XI”, role:“Bowler”,  val:8.0},
+{id:9,  name:“Dan Burgess”,          team:“1st XI”, role:“Bowler”,  val:8.0},
+{id:10, name:“Cameron Sharp”,        team:“1st XI”, role:“Bowler”,  val:8.5},
+{id:11, name:“George Solti-Dupas”,   team:“1st XI”, role:“Bowler”,  val:8.0},
+// ── 2nd XI ─────────────────────────────────────────────────────
+{id:12, name:“Fahim Afzal”,          team:“2nd XI”, role:“Batter”,  val:9.0},
+{id:13, name:“Darren Wilson”,        team:“2nd XI”, role:“Batter”,  val:9.5},
+{id:14, name:“Chris Reynolds”,       team:“2nd XI”, role:“Keeper”,  val:9.5},
+{id:15, name:“Joshua Hannan”,        team:“2nd XI”, role:“AR”,      val:10.0},
+{id:16, name:“Jacob Terry”,          team:“2nd XI”, role:“Batter”,  val:8.0},
+{id:17, name:“Leo Smalley”,          team:“2nd XI”, role:“Batter”,  val:9.5},
+{id:18, name:“Michael Hannan”,       team:“2nd XI”, role:“AR”,      val:8.0},
+{id:19, name:“Daniel Bell”,          team:“2nd XI”, role:“Bowler”,  val:8.0},
+{id:20, name:“Harry BrookDobson”,    team:“2nd XI”, role:“AR”,      val:8.0},
+{id:21, name:“Muhammad Daim Farooq”, team:“2nd XI”, role:“Bowler”,  val:8.0},
+{id:22, name:“James Abbott”,         team:“2nd XI”, role:“Bowler”,  val:9.5},
+{id:23, name:“Samuel Kelly”,         team:“2nd XI”, role:“AR”,      val:8.5},
+// ── 3rd XI ─────────────────────────────────────────────────────
+{id:24, name:“Dave Hodgson”,         team:“3rd XI”, role:“Batter”,  val:7.5},
+{id:25, name:“Parth Sunil”,          team:“3rd XI”, role:“AR”,      val:8.0},
+{id:26, name:“James Butterfield”,    team:“3rd XI”, role:“Batter”,  val:8.5},
+{id:27, name:“Tauqeer Ahmed”,        team:“3rd XI”, role:“AR”,      val:8.5},
+{id:28, name:“Rayyan Azeem”,         team:“3rd XI”, role:“Batter”,  val:7.0},
+{id:29, name:“Tom Dixon”,            team:“3rd XI”, role:“Batter”,  val:7.5},
+{id:30, name:“Finlay McCaul”,        team:“3rd XI”, role:“Keeper”,  val:7.5},
+{id:31, name:“Yasir Malik”,          team:“3rd XI”, role:“AR”,      val:9.0},
+{id:32, name:“Daniel Metcalfe”,      team:“3rd XI”, role:“Bowler”,  val:7.0},
+{id:33, name:“Spencer Bell”,         team:“3rd XI”, role:“Bowler”,  val:7.0},
+{id:34, name:“Paul Hannan”,          team:“3rd XI”, role:“Batter”,  val:7.0},
+{id:35, name:“Muhammad Jawad”,       team:“3rd XI”, role:“AR”,      val:8.0},
+{id:36, name:“Mahesh Pakkala”,       team:“3rd XI”, role:“Keeper”,  val:8.5},
+// ── 4th XI ─────────────────────────────────────────────────────
+{id:37, name:“Ayoub Khan”,           team:“4th XI”, role:“Batter”,  val:6.0},
+{id:38, name:“Syed Shah”,            team:“4th XI”, role:“AR”,      val:8.0},
+{id:39, name:“Stan Amor”,            team:“4th XI”, role:“AR”,      val:8.0},
+{id:40, name:“Tony McCall”,          team:“4th XI”, role:“Batter”,  val:6.0},
+{id:41, name:“Tom Petts”,            team:“4th XI”, role:“Bowler”,  val:6.5},
+{id:42, name:“William Frost”,        team:“4th XI”, role:“Bowler”,  val:6.0},
+{id:43, name:“Jack Illingworth”,     team:“4th XI”, role:“Batter”,  val:5.5},
+{id:44, name:“M Rasool”,             team:“4th XI”, role:“Bowler”,  val:5.5},
+{id:45, name:“Leon Amor”,            team:“4th XI”, role:“Bowler”,  val:6.0},
+{id:46, name:“James Wilkinson”,      team:“4th XI”, role:“Keeper”,  val:5.5},
+{id:47, name:“Ashley Free”,          team:“4th XI”, role:“Batter”,  val:5.5},
+{id:48, name:“Jon Moffatt”,          team:“4th XI”, role:“Batter”,  val:5.0},
+{id:49, name:“Freddie Whitfield”,    team:“4th XI”, role:“Bowler”,  val:5.0},
+{id:50, name:“Afzal Ahmed”,          team:“4th XI”, role:“Bowler”,  val:5.0},
+{id:51, name:“Asad Mehmood”,         team:“4th XI”, role:“Bowler”,  val:5.0},
+{id:52, name:“Shahid Ahmed”,         team:“4th XI”, role:“Bowler”,  val:5.0},
+{id:53, name:“Irshad MK”,            team:“4th XI”, role:“Bowler”,  val:5.5},
+];
+
+const TEAMS = [“1st XI”,“2nd XI”,“3rd XI”,“4th XI”];
+const ROLES = [“Batter”,“AR”,“Bowler”,“Keeper”];
+const RNAME = {“AR”:“All-Rounder”};
+const RICON = {Batter:“🏏”,Bowler:“🎳”,AR:“⚡”,Keeper:“🧤”};
+const RPILL = {Keeper:{bg:”#ebff00”,c:”#333”},Batter:{bg:”#00ff87”,c:”#333”},AR:{bg:”#04f5ff”,c:”#333”},Bowler:{bg:”#e90052”,c:”#fff”}};
+const TCOL  = {“1st XI”:”#2ecc71”,“2nd XI”:”#3498db”,“3rd XI”:”#9b59b6”,“4th XI”:”#e67e22”};
+const TBG   = {“1st XI”:“rgba(46,204,113,0.12)”,“2nd XI”:“rgba(52,152,219,0.12)”,“3rd XI”:“rgba(155,89,182,0.12)”,“4th XI”:“rgba(230,126,34,0.12)”};
+
+function calcPts(s, cap) {
+if (!s || s.dnp) return 0;
+let p = 0;
+const r = s.r||0, w = s.w||0;
+// Batting: 1pt per run + milestone bonuses
+p += r;
+if (r >= 100) p += 50;
+else if (r >= 50) p += 20;
+if (s.duck) p -= 5;
+// Bowling: 15pts per wicket + haul bonuses
+p += w * 15;
+if (w >= 5) p += 25;
+else if (w >= 3) p += 10;
+// Fielding: 5pts each
+p += ((s.c||0)+(s.s||0))*5;
+return cap ? p*2 : p;
+}
+
+function makeCode(n) {
+return “BCC-”+n.toUpperCase().replace(/[^A-Z]/g,””).slice(0,3).padEnd(3,“X”)+”-”+Date.now().toString(36).toUpperCase().slice(-4);
+}
+
+function getErrors(sel) {
+const rc = sel.reduce((a,p)=>({…a,[p.role]:(a[p.role]||0)+1}),{});
+const tc = sel.reduce((a,p)=>({…a,[p.team]:(a[p.team]||0)+1}),{});
+const e = [];
+if (sel.length<11) e.push(“Select “+(11-sel.length)+” more”);
+if ((rc.Keeper||0)!==1) e.push(“Need exactly 1 Keeper”);
+if ((rc.Batter||0)<3) e.push(“Min 3 Batters (have “+(rc.Batter||0)+”)”);
+if ((rc.Batter||0)>5) e.push(“Max 5 Batters”);
+if ((rc.AR||0)<2) e.push(“Min 2 All-Rounders (have “+(rc.AR||0)+”)”);
+if ((rc.AR||0)>3) e.push(“Max 3 All-Rounders”);
+if ((rc.Bowler||0)<2) e.push(“Min 2 Bowlers (have “+(rc.Bowler||0)+”)”);
+TEAMS.forEach(t => { if ((tc[t]||0)<2) e.push(“Min 2 from “+t); });
+return e;
+}
+
+const INIT = {
+subs:[], stats:{}, wk:1, open:false,
+fx:[
+{id:1,home:“Baildon CC”,away:“Hunslet Nelson CC”,date:“2026-04-18”,team:“1st XI”,res:“Lost 149 vs 144”},
+{id:2,home:“Baildon CC”,away:“Sandal CC”,        date:“2026-04-18”,team:“1st XI”,res:“Lost 162 vs 165”},
+{id:3,home:“Baildon CC”,away:“Leeds Gladiators”, date:“2026-04-18”,team:“3rd XI”,res:“Lost 161 vs 314”},
+{id:4,home:“Baildon CC”,away:“West Bowling CC”,  date:“2026-04-18”,team:“4th XI”,res:“Won 59/5 vs 58”},
+{id:5,home:“Baildon CC”,away:“Leeds Sikh CC”,    date:“2026-04-26”,team:“3rd XI”,res:“Lost 186 vs 187”},
+{id:6,home:“Baildon CC”,away:“Yeadon CC”,        date:“2026-04-26”,team:“4th XI”,res:“Won 150/6 vs 148”},
+],
+};
+
+function loadS() { try { const s=localStorage.getItem(STORE); return s?JSON.parse(s):null; } catch { return null; } }
+function saveS(s) { try { localStorage.setItem(STORE,JSON.stringify(s)); } catch {} }
+
+function RB({ role }) {
+const p = RPILL[role]||{bg:”#ccc”,c:”#333”};
+return <span style={{background:p.bg,color:p.c,borderRadius:3,padding:“2px 6px”,fontSize:10,fontWeight:800,display:“inline-block”,whiteSpace:“nowrap”}}>{RNAME[role]||role}</span>;
+}
+
+function TB({ team }) {
+return <span style={{background:TBG[team]||”#eee”,color:TCOL[team]||”#333”,border:“1px solid “+(TCOL[team]||”#ccc”)+“55”,borderRadius:3,padding:“2px 6px”,fontSize:10,fontWeight:700,display:“inline-block”,whiteSpace:“nowrap”}}>{team}</span>;
+}
+
+function NavBar({ page, setPage }) {
+return (
+<nav style={{position:“sticky”,top:0,zIndex:999,background:PUR,display:“flex”,alignItems:“center”,justifyContent:“space-between”,padding:“0 14px”,height:50,boxShadow:“0 1px 4px rgba(0,0,0,0.3)”}}>
+<div style={{display:“flex”,alignItems:“center”,gap:9,cursor:“pointer”}} onClick={()=>setPage(“home”)}>
+<div style={{width:32,height:32,borderRadius:“50%”,overflow:“hidden”,border:“2px solid rgba(255,255,255,0.4)”,background:”#fff”,flexShrink:0}}>
+<img src={LOGO} alt=“BCC” style={{width:“100%”,height:“100%”,objectFit:“contain”,padding:2}} />
+</div>
+<span style={{fontSize:15,fontWeight:700,color:”#fff”}}>Baildon CC Fantasy</span>
+</div>
+<div style={{display:“flex”}}>
+{[[“🏠”,“home”],[“👕”,“players”],[“🏏”,“pick”],[“👥”,“teams”],[“🏆”,“table”],[“📅”,“fixtures”],[“⚙️”,“admin”]].map(function(pair) {
+const icon = pair[0], p = pair[1];
+return (
+<button key={p} onClick={()=>setPage(p)} style={{background:“none”,border:“none”,borderBottom:page===p?“3px solid #00ff87”:“3px solid transparent”,color:page===p?”#00ff87”:“rgba(255,255,255,0.55)”,height:50,padding:“0 9px”,cursor:“pointer”,fontFamily:“inherit”,fontSize:13,fontWeight:600,transition:“all .15s”}}>
+{icon}
+</button>
+);
+})}
+</div>
+</nav>
+);
+}
+
+function Btn(props) {
+return <button onClick={props.onClick} disabled={props.disabled} style={{background:props.outline?props.bg||”#fff”:props.bg||PUR,color:props.outline?props.bg||PUR:”#fff”,border:props.outline?“1.5px solid “+(props.bg||PUR):“none”,borderRadius:props.round?24:8,padding:props.sm?“8px 14px”:“11px 22px”,fontFamily:“inherit”,fontSize:props.sm?13:14,fontWeight:700,cursor:props.disabled?“not-allowed”:“pointer”,opacity:props.disabled?0.4:1,width:props.full?“100%”:undefined,textDecoration:“none”,display:“inline-block”}}>{props.children}</button>;
+}
+function FilterRow(props) {
+const team = props.team, setTeam = props.setTeam, role = props.role, setRole = props.setRole;
+return (
+<div style={{background:”#fff”,borderBottom:“1px solid #eee”,padding:“9px 13px”,display:“flex”,gap:5,flexWrap:“wrap”}}>
+{[“All”,“1st XI”,“2nd XI”,“3rd XI”,“4th XI”].map(function(t) {
+return <button key={t} className={“fp”+(team===t?” on”:””)} onClick={function(){setTeam(t);}} style={team===t&&t!==“All”?{background:TCOL[t],borderColor:TCOL[t],color:”#fff”}:{}}>{t}</button>;
+})}
+{[“All”,“Batter”,“AR”,“Bowler”,“Keeper”].map(function(r) {
+return <button key={r} className={“fp”+(role===r?” on”:””)} onClick={function(){setRole(r);}} style={role===r&&r!==“All”?{background:RPILL[r].bg,color:RPILL[r].c,borderColor:“transparent”}:{}}>{r===“All”?“All Positions”:RICON[r]+” “+(RNAME[r]||r)}</button>;
+})}
+</div>
+);
+}
+function PlHdr() {
+return (
+<div style={{display:“grid”,gridTemplateColumns:“1fr 78px 90px 64px 34px”,padding:“8px 13px”,background:”#f7f7f7”,borderBottom:“1px solid #eee”}}>
+{[“Player”,“Team”,“Role”,“Price”,””].map(function(h,i) {
+return <span key={i} style={{fontSize:10,fontWeight:700,textTransform:“uppercase”,letterSpacing:.7,color:”#999”,textAlign:i===0?“left”:“center”}}>{h}</span>;
+})}
+</div>
+);
+}
+function PageTop(props) {
+return (
+<div style={{background:PGRAD,padding:“15px 16px”,display:“flex”,alignItems:“center”,justifyContent:“space-between”,flexWrap:“wrap”,gap:8}}>
+<span style={{fontSize:19,fontWeight:800,color:”#fff”}}>{props.title}</span>
+{props.children}
+</div>
+);
+}
+
+export default function App() {
+const [gs, setGs] = useState(function() { return loadS() || INIT; });
+const [page, setPage] = useState(“home”);
+const [mgrName, setMgrName] = useState(””);
+const [teamName, setTeamName] = useState(””);
+const [sel, setSel] = useState([]);
+const [cap, setCap] = useState(null);
+const [subCode, setSubCode] = useState(””);
+const [submitted, setSubmitted] = useState(false);
+const [fTeam, setFTeam] = useState(“All”);
+const [fRole, setFRole] = useState(“All”);
+const [fSearch, setFSearch] = useState(””);
+const [plTeam, setPlTeam] = useState(“All”);
+const [plRole, setPlRole] = useState(“All”);
+const [plSearch, setPlSearch] = useState(””);
+const [plSort, setPlSort] = useState(“val”);
+const [aPwd, setAPwd] = useState(””);
+const [aOpen, setAOpen] = useState(false);
+const [aTab, setATab] = useState(“overview”);
+const [statsWk, setStatsWk] = useState(1);
+const [statsEntry, setStatsEntry] = useState({});
+const [aiText, setAiText] = useState(””);
+const [aiLoading, setAiLoading] = useState(false);
+const [aiResult, setAiResult] = useState(null);
+const [newFx, setNewFx] = useState({home:“Baildon CC”,away:””,date:””,team:“1st XI”,res:””});
+const [expanded, setExpanded] = useState(null);
+
+const persist = function(s) { setGs(s); saveS(s); };
+const subs = gs.subs, stats = gs.stats, wk = gs.wk, open = gs.open, fx = gs.fx;
+
+const gwPts = function(sub, w) {
+const st = stats[w]||{};
+return sub.players.reduce(function(sum,p) { return sum + calcPts(st[p.id], p.cap, p.tri); }, 0);
+};
+const totalPts = function(sub) {
+return Array.from({length:wk}, function(_,i) { return gwPts(sub,i+1); }).reduce(function(a,b){return a+b;}, 0);
+};
+const sorted = […subs].sort(function(a,b) { return totalPts(b)-totalPts(a); });
+
+const spent = sel.reduce(function(s,p){return s+p.val;}, 0);
+const left = +(BUDGET-spent).toFixed(1);
+const roleCounts = sel.reduce(function(a,p){return {…a,[p.role]:(a[p.role]||0)+1};}, {});
+const teamCounts = sel.reduce(function(a,p){return {…a,[p.team]:(a[p.team]||0)+1};}, {});
+const errors = getErrors(sel);
+const canSubmit = mgrName.trim() && teamName.trim() && errors.length===0 && !!cap;
+
+const togglePlayer = function(pl) {
+if (sel.find(function(p){return p.id===pl.id;})) {
+setSel(sel.filter(function(p){return p.id!==pl.id;}));
+if (cap && cap.id===pl.id) setCap(null);
+return;
+}
+if (sel.length>=11 || left<pl.val) return;
+if (pl.role===“Keeper” && (roleCounts.Keeper||0)>=1) return;
+if (pl.role===“Batter” && (roleCounts.Batter||0)>=5) return;
+if (pl.role===“AR” && (roleCounts.AR||0)>=3) return;
+setSel([…sel, pl]);
+};
+
+const handleSubmit = function() {
+if (!canSubmit) return;
+const code = makeCode(mgrName);
+persist({…gs, subs:[…subs, {
+code:code, mgrName:mgrName.trim(), teamName:teamName.trim(),
+players:sel.map(function(p){return {id:p.id, cap:p.id===cap.id};}),
+at:new Date().toISOString(),
+}]});
+setSubCode(code);
+setSubmitted(true);
+};
+
+const parseAI = async function() {
+if (!aiText.trim()) return;
+setAiLoading(true); setAiResult(null);
+try {
+const resp = await fetch(“https://api.anthropic.com/v1/messages”, {
+method:“POST”, headers:{“Content-Type”:“application/json”},
+body:JSON.stringify({
+model:“claude-sonnet-4-20250514”, max_tokens:1500,
+system:“Parse cricket scorecard. Known players: “+PLAYERS.map(function(p){return p.name;}).join(”, “)+”. Return ONLY raw JSON: {"players":[{"name":"","r":0,"w":0,"c":0,"s":0,"duck":false,"dnp":false}]}”,
+messages:[{role:“user”,content:aiText}],
+}),
+});
+const data = await resp.json();
+const txt = data.content.map(function(c){return c.text||””;}).join(””).replace(/`json|`/g,””).trim();
+setAiResult(JSON.parse(txt).players||[]);
+} catch(err) { setAiResult([]); }
+setAiLoading(false);
+};
+
+const applyAI = function() {
+const ne = {…statsEntry};
+(aiResult||[]).forEach(function(ps) {
+const pl = PLAYERS.find(function(p) {
+const a=p.name.toLowerCase(), b=ps.name.toLowerCase();
+return a===b || a.includes(b.split(” “).pop()) || b.includes(a.split(” “).pop());
+});
+if (pl) ne[pl.id] = {r:ps.r||0,w:ps.w||0,c:ps.c||0,s:ps.s||0,duck:!!ps.duck,dnp:!!ps.dnp};
+});
+setStatsEntry(ne); setAiResult(null); setAiText(””);
+};
+
+const pickerList = PLAYERS.filter(function(p) {
+return (fTeam===“All”||p.team===fTeam) && (fRole===“All”||p.role===fRole) && (!fSearch||p.name.toLowerCase().includes(fSearch.toLowerCase()));
+});
+
+const playerList = […PLAYERS].filter(function(p) {
+return (plTeam===“All”||p.team===plTeam) && (plRole===“All”||p.role===plRole) && (!plSearch||p.name.toLowerCase().includes(plSearch.toLowerCase()));
+}).sort(function(a,b) {
+if (plSort===“val”) return b.val-a.val;
+if (plSort===“name”) return a.name.localeCompare(b.name);
+return a.team.localeCompare(b.team)||b.val-a.val;
+});
+
+const css = “*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}\nhtml,body{background:#e8e8e8;font-family:-apple-system,BlinkMacSystemFont,‘Segoe UI’,Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}\n.fp{padding:6px 12px;border-radius:20px;border:1.5px solid #ddd;cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;background:#fff;color:#555;transition:all .13s}\n.fp:hover{border-color:#37003c;color:#37003c}\n.fp.on{background:#37003c;color:#fff;border-color:#37003c}\n.prow{display:grid;grid-template-columns:1fr 78px 90px 64px 34px;padding:11px 13px;border-bottom:1px solid #f5f5f5;align-items:center;cursor:pointer;background:#fff;transition:background .12s}\n.prow:hover{background:#faf5ff}\n.prow.sel{background:#f0fdf4}\n.prow.dis{opacity:.32;cursor:not-allowed}\n.inp{width:100%;padding:9px 11px;border:1.5px solid #ddd;border-radius:6px;font-family:inherit;font-size:13px;color:#1a1a1a;outline:none}\n.inp:focus{border-color:#37003c}\n.inp::placeholder{color:#bbb}\n.ppill{background:#37003c;color:#fff;border-radius:4px;padding:3px 10px;font-size:17px;font-weight:800;display:inline-block}\n.ltrow{display:grid;padding:10px 13px;border-bottom:1px solid #f5f5f5;align-items:center;background:#fff}\n.ltrow:last-child{border-bottom:none}\n.fxrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:7px;padding:12px 15px;border-bottom:1px solid #f5f5f5;background:#fff}\n.fxrow:last-child{border-bottom:none}\n.atab{padding:7px 12px;border-radius:4px;border:1px solid #ddd;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;background:#fff;color:#555}\n.atab.on{background:#37003c;color:#fff;border-color:#37003c}\n@media(max-width:660px){.pgrid{grid-template-columns:1fr!important}.sbcol{position:static!important;height:auto!important;border-left:none!important;border-top:2px solid #37003c}}”;
+
+return (
+<div style={{background:”#e8e8e8”,minHeight:“100vh”}}>
+<style>{css}</style>
+<NavBar page={page} setPage={setPage} />
+
+```
+  {page==="home" && (
+    <div>
+      <div style={{background:HGRAD,padding:"30px 18px 26px",textAlign:"center"}}>
+        <div style={{width:80,height:80,borderRadius:"50%",marginBottom:16,overflow:"hidden",border:"3px solid rgba(255,255,255,0.4)",boxShadow:"0 0 0 6px rgba(255,255,255,0.08),0 8px 32px rgba(0,0,0,0.4)",background:"#fff",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
+          <img src={LOGO} alt="Baildon CC" style={{width:"90%",height:"80%",objectFit:"contain",position:"absolute",top:"6%"}} />
+          <svg viewBox="0 0 80 80" style={{position:"absolute",inset:0,width:"100%",height:"100%"}}>
+            <path id="curve" d="M 12,54 A 30,30 0 0,0 68,54" fill="none"/>
+            <text style={{fontSize:"6.5px",fontWeight:"bold",fill:"#8b0000",fontFamily:"Arial"}}>
+              <textPath href="#curve" startOffset="50%" textAnchor="middle">Established 1850</textPath>
+            </text>
+          </svg>
+        </div>
+        <h1 style={{fontSize:"clamp(18px,5vw,28px)",fontWeight:800,color:"#fff",marginBottom:3}}>Baildon CC Fantasy Cricket</h1>
+        <p style={{fontSize:11,color:"rgba(255,255,255,0.5)",letterSpacing:"1.5px",textTransform:"uppercase",marginBottom:18}}>2026 Season</p>
+        <div style={{display:"inline-block",background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:8,padding:"10px 20px",marginBottom:18}}>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:"1.5px",fontWeight:600}}>Gameweek</div>
+          <div style={{fontSize:26,fontWeight:800,color:"#fff",marginTop:2}}>{wk}</div>
+        </div>
+        <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
+          <Btn onClick={function(){setPage("pick");}}>Pick Team</Btn>
+          <Btn outline={true} onClick={function(){setPage("players");}}>View Players</Btn>
+        </div>
+      </div>
+      <div style={{display:"flex",background:PUR}}>
+        {[["Managers",subs.length],["Gameweek",wk],["Players","54"]].map(function(pair) {
+          return (
+            <div key={pair[0]} style={{flex:1,padding:"12px 6px",textAlign:"center",borderRight:"1px solid rgba(255,255,255,0.1)"}}>
+              <div style={{fontSize:20,fontWeight:800,color:"#fff"}}>{pair[1]}</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:1,fontWeight:600,marginTop:2}}>{pair[0]}</div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{background:"#fff"}}>
+        {[["👕","Player List","Browse all 54 Baildon players","players"],["🏏","Pick Team","Select your 11-player squad","pick"],["👥","All Teams",open?"See every squad":"Visible after Friday 8pm","teams"],["🏆","League Table","Season standings","table"],["📅","Fixtures","2026 match schedule","fixtures"]].map(function(row) {
+          return (
+            <div key={row[3]} onClick={function(){setPage(row[3]);}} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"15px 17px",borderBottom:"1px solid #f0f0f0",cursor:"pointer",background:"#fff",transition:"background .12s"}} onMouseEnter={function(e){e.currentTarget.style.background="#faf5ff";}} onMouseLeave={function(e){e.currentTarget.style.background="#fff";}}>
+              <div style={{display:"flex",alignItems:"center",gap:12}}>
+                <span style={{fontSize:20,width:30,textAlign:"center"}}>{row[0]}</span>
+                <div>
+                  <div style={{fontWeight:600,fontSize:15}}>{row[1]}</div>
+                  <div style={{fontSize:12,color:"#888",marginTop:1}}>{row[2]}</div>
+                </div>
+              </div>
+              <span style={{color:"#ccc",fontSize:14}}>{"›"}</span>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{textAlign:"center",padding:"10px 0 20px"}}>
+        <button onClick={function(){setPage("admin");}} style={{background:"none",border:"none",color:"#bbb",fontSize:12,cursor:"pointer"}}>Commissioner Login</button>
+      </div>
+    </div>
+  )}
+
+  {page==="players" && (
+    <div>
+      <PageTop title="Player List"><Btn sm={true} onClick={function(){setPage("pick");}}>Pick Team →</Btn></PageTop>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(165px,1fr))",gap:7,padding:"8px 8px 3px",background:"#e8e8e8"}}>
+        {TEAMS.map(function(t) {
+          const tp = PLAYERS.filter(function(p){return p.team===t;});
+          const rco = tp.reduce(function(a,p){return {...a,[p.role]:(a[p.role]||0)+1};},{});
+          return (
+            <div key={t} onClick={function(){setPlTeam(plTeam===t?"All":t);}} style={{background:plTeam===t?"#fff":TBG[t],border:"2px solid "+(plTeam===t?TCOL[t]:"transparent"),borderRadius:8,padding:"10px 12px",cursor:"pointer"}}>
+              <div style={{display:"flex",justifyContent:"space-between",marginBottom:5}}>
+                <span style={{fontWeight:700,fontSize:14,color:TCOL[t]}}>{t}</span>
+                <span style={{fontSize:11,color:"#888"}}>{tp.length}p</span>
+              </div>
+              <div style={{display:"flex",gap:4,flexWrap:"wrap",marginBottom:4}}>
+                {Object.entries(rco).map(function(entry) {
+                  const role=entry[0], n=entry[1];
+                  return <span key={role} style={{background:RPILL[role]?RPILL[role].bg:"#ccc",color:RPILL[role]?RPILL[role].c:"#333",borderRadius:3,padding:"1px 5px",fontSize:9.5,fontWeight:800}}>{RICON[role]||"?"} {n}</span>;
+                })}
+              </div>
+              <span style={{fontSize:11,color:"#888"}}>Top: <b style={{color:TCOL[t]}}>{"£"+Math.max.apply(null,tp.map(function(p){return p.val;}))+"m"}</b></span>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{background:"#fff",borderBottom:"1px solid #eee",padding:"10px 13px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,background:"#f5f5f5",borderRadius:22,padding:"8px 14px"}}>
+          <span style={{color:"#bbb"}}>🔍</span>
+          <input value={plSearch} onChange={function(e){setPlSearch(e.target.value);}} placeholder="Search By Name" style={{border:"none",outline:"none",background:"transparent",flex:1,fontFamily:"inherit",fontSize:14,color:"#1a1a1a"}} />
+        </div>
+      </div>
+      <FilterRow team={plTeam} setTeam={setPlTeam} role={plRole} setRole={setPlRole} />
+      <div style={{display:"flex",gap:5,padding:"7px 8px",background:"#fff",borderBottom:"1px solid #eee",alignItems:"center"}}>
+        <span style={{color:"#999",fontSize:11,fontWeight:600}}>Sort:</span>
+        {[["val","Price"],["name","Name"],["team","Team"]].map(function(pair) {
+          return <button key={pair[0]} className={"fp"+(plSort===pair[0]?" on":"")} style={{padding:"5px 10px"}} onClick={function(){setPlSort(pair[0]);}}>{pair[1]}</button>;
+        })}
+        <span style={{color:"#ccc",fontSize:11,marginLeft:"auto"}}>{playerList.length} players</span>
+      </div>
+      <div style={{background:"#fff"}}>
+        <PlHdr />
+        {playerList.map(function(pl) {
+          return (
+            <div key={pl.id} className="prow">
+              <div><div style={{fontSize:14,fontWeight:600}}>{pl.name}</div><div style={{fontSize:11,color:"#888",marginTop:1}}>{pl.team}</div></div>
+              <div style={{textAlign:"center"}}><TB team={pl.team} /></div>
+              <div style={{textAlign:"center"}}><RB role={pl.role} /></div>
+              <div style={{fontSize:14,fontWeight:700,textAlign:"right",paddingRight:4}}>{"£"+pl.val+"m"}</div>
+              <div></div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{padding:"14px 10px",textAlign:"center"}}><Btn onClick={function(){setPage("pick");}}>Pick Your Team</Btn></div>
+    </div>
+  )}
+
+  {page==="pick" && submitted && (
+    <div style={{maxWidth:430,margin:"36px auto",padding:"0 12px"}}>
+      <div style={{background:"#fff",borderRadius:8,padding:26,textAlign:"center"}}>
+        <div style={{fontSize:46,marginBottom:10}}>✅</div>
+        <h2 style={{fontSize:21,fontWeight:800,color:PUR,marginBottom:5}}>Team Confirmed!</h2>
+        <p style={{color:"#888",marginBottom:16,fontSize:14}}>{"Nice one, "+mgrName+"."}</p>
+        <div style={{background:HGRAD,borderRadius:8,padding:16,textAlign:"center",margin:"14px 0"}}>
+          <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:2,fontWeight:600,marginBottom:5}}>Post this code in WhatsApp</div>
+          <div style={{fontSize:23,fontWeight:800,letterSpacing:6,color:"#fff"}}>{subCode}</div>
+        </div>
+        <div style={{textAlign:"left",marginBottom:18}}>
+          {sel.map(function(p) {
+            const isCap = p.id===cap?.id;
+            return (
+              <div key={p.id} style={{display:"flex",alignItems:"center",gap:7,padding:"6px 0",borderBottom:"1px solid #f5f5f5"}}>
+                <RB role={p.role} />
+                <span style={{flex:1,fontSize:13,fontWeight:600,color:isCap?"#b7791f":"#1a1a1a"}}>{isCap?"(C) ":""}{p.name}</span>
+                <span style={{fontSize:13,fontWeight:700,color:PUR}}>{"£"+p.val+"m"}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{display:"flex",gap:8,justifyContent:"center"}}>
+          <Btn onClick={function(){setSubmitted(false);setSel([]);setCap(null);setMgrName("");setTeamName("");}}>New Entry</Btn>
+          <Btn outline={true} onClick={function(){setPage("home");}}>Home</Btn>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {page==="pick" && !submitted && (
+    <div className="pgrid" style={{display:"grid",gridTemplateColumns:"1fr 280px"}}>
+      <div style={{background:"#e8e8e8"}}>
+        <div style={{background:"#fff",borderBottom:"1px solid #eee",padding:"11px 13px"}}>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
+            <div>
+              <label style={{fontSize:11,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:4}}>Your Name *</label>
+              <input className="inp" value={mgrName} onChange={function(e){setMgrName(e.target.value);}} placeholder="e.g. John Smith" />
+            </div>
+            <div>
+              <label style={{fontSize:11,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,display:"block",marginBottom:4}}>Team Name *</label>
+              <input className="inp" value={teamName} onChange={function(e){setTeamName(e.target.value);}} placeholder="e.g. The Yorkshiremen" />
+            </div>
+          </div>
+        </div>
+        <div style={{background:"#f0fdf4",borderBottom:"1px solid #c6f6d5",padding:"8px 13px",display:"flex",flexWrap:"wrap",gap:9}}>
+          {[["Budget","£75m"],["Min/team","2+"],["Keeper","1"],["Batters","3–5"],["ARs","2–3"],["Bowlers","2–5"]].map(function(pair) {
+            return <span key={pair[0]} style={{fontSize:12,fontWeight:600,color:"#2d3748"}}>{pair[0]+": "}<b style={{color:"#276749"}}>{pair[1]}</b></span>;
+          })}
+        </div>
+        <div style={{background:"#fff",borderBottom:"1px solid #eee",padding:"10px 13px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,background:"#f5f5f5",borderRadius:22,padding:"8px 14px"}}>
+            <span style={{color:"#bbb"}}>🔍</span>
+            <input value={fSearch} onChange={function(e){setFSearch(e.target.value);}} placeholder="Search By Name" style={{border:"none",outline:"none",background:"transparent",flex:1,fontFamily:"inherit",fontSize:14,color:"#1a1a1a"}} />
+          </div>
+        </div>
+        <FilterRow team={fTeam} setTeam={setFTeam} role={fRole} setRole={setFRole} />
+        <div style={{background:"#fff"}}>
+          <PlHdr />
+          {pickerList.map(function(pl) {
+            const isSel = !!sel.find(function(p){return p.id===pl.id;});
+            const isCap2 = cap && cap.id===pl.id;
+            const canAdd = !isSel && sel.length<11 && left>=pl.val && !(pl.role==="Keeper"&&(roleCounts.Keeper||0)>=1) && !(pl.role==="Batter"&&(roleCounts.Batter||0)>=5) && !(pl.role==="AR"&&(roleCounts.AR||0)>=3);
+            return (
+              <div key={pl.id} className={"prow"+(isSel?" sel":"")+((!isSel&&!canAdd)?" dis":"")} onClick={function(){togglePlayer(pl);}}>
+                <div><div style={{fontSize:14,fontWeight:600,color:isSel?"#276749":"#1a1a1a"}}>{pl.name}</div><div style={{fontSize:11,color:"#888",marginTop:1}}>{pl.team}</div></div>
+                <div style={{textAlign:"center"}}><TB team={pl.team} /></div>
+                <div style={{textAlign:"center"}}><RB role={pl.role} /></div>
+                <div style={{fontSize:14,fontWeight:700,color:isSel?"#276749":"#1a1a1a",textAlign:"right",paddingRight:4}}>{"£"+pl.val+"m"}</div>
+                <div style={{textAlign:"center"}}>
+                  {isSel
+                    ? <button onClick={function(e){e.stopPropagation();setCap(isCap2?null:pl);}} style={{width:26,height:26,borderRadius:"50%",border:"none",cursor:"pointer",background:isCap2?"#d4a017":"#276749",color:"#fff",fontWeight:800,fontSize:11,display:"inline-flex",alignItems:"center",justifyContent:"center"}}>{isCap2?"C":"✓"}</button>
+                    : <div style={{width:26,height:26,borderRadius:"50%",background:PUR,color:"#fff",display:"inline-flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:16}}>+</div>
+                  }
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="sbcol" style={{background:"#fff",borderLeft:"1px solid #eee",position:"sticky",top:50,height:"calc(100vh - 50px)",overflowY:"auto"}}>
+        <div style={{background:PGRAD,padding:"13px 13px"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end"}}>
+            <div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:1,fontWeight:600}}>Bank</div>
+              <div style={{fontSize:22,fontWeight:800,color:"#fff",marginTop:1}}>{"£"+left+"m"}</div>
+            </div>
+            <div style={{textAlign:"right"}}>
+              <div style={{fontSize:10,color:"rgba(255,255,255,0.5)",textTransform:"uppercase",letterSpacing:1,fontWeight:600}}>Spent</div>
+              <div style={{fontSize:22,fontWeight:800,color:"#fff",marginTop:1}}>{"£"+spent.toFixed(1)+"m"}</div>
+            </div>
+          </div>
+          <div style={{background:"rgba(255,255,255,0.2)",borderRadius:10,height:5,marginTop:9,overflow:"hidden"}}>
+            <div style={{height:"100%",borderRadius:10,width:(spent/BUDGET*100)+"%",background:left<5?"#ff4d4d":"#00ff87",transition:"width .3s"}} />
+          </div>
+        </div>
+
+        <div style={{padding:"11px 12px"}}>
+          <div style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:7}}>Team Coverage</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:12}}>
+            {TEAMS.map(function(t) {
+              const n=teamCounts[t]||0, ok=n>=2;
+              return (
+                <div key={t} style={{background:ok?"#f0fff4":"#fff5f5",border:"1px solid "+(ok?"#9ae6b4":"#fed7d7"),borderRadius:6,padding:"6px 8px"}}>
+                  <div style={{fontSize:10,fontWeight:700,color:ok?"#276749":"#c53030"}}>{t}</div>
+                  <div style={{fontSize:13,fontWeight:800,color:ok?"#276749":"#c53030"}}>{n}<span style={{fontSize:9,opacity:.5}}>/2+</span></div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{display:"flex",justifyContent:"space-between",marginBottom:7}}>
+            <span style={{fontSize:13,fontWeight:700}}>{"Squad ("+sel.length+"/11)"}</span>
+            {sel.length>0 && <button onClick={function(){setSel([]);setCap(null);}} style={{background:"none",border:"none",color:"#c53030",fontSize:12,cursor:"pointer",fontWeight:600}}>Clear</button>}
+          </div>
+
+          {sel.length===0
+            ? <p style={{color:"#bbb",fontSize:12,padding:"6px 0"}}>Tap + to add players</p>
+            : sel.map(function(p) {
+                const isCap = cap && cap.id===p.id;
+                return (
+                  <div key={p.id} style={{display:"flex",alignItems:"center",gap:6,padding:"6px 0",borderBottom:"1px solid #f5f5f5"}}>
+                    <RB role={p.role} />
+                    <div style={{flex:1}}>
+                      <div style={{fontSize:12,fontWeight:600,color:isCap?"#b7791f":"#1a1a1a"}}>{isCap?"(C) ":""}{p.name}</div>
+                      <div style={{fontSize:10,color:"#aaa"}}>{p.team}</div>
+                    </div>
+                    <span style={{fontSize:12,fontWeight:700,color:PUR,marginRight:4}}>{"£"+p.val+"m"}</span>
+                    <button onClick={function(){setSel(sel.filter(function(x){return x.id!==p.id;}));if(cap&&cap.id===p.id)setCap(null);}} style={{background:"none",border:"none",color:"#ccc",cursor:"pointer",fontSize:15,lineHeight:1}}>×</button>
+                  </div>
+                );
+              })
+          }
+
+          <div style={{borderTop:"1px solid #f0f0f0",marginTop:10,paddingTop:10}}>
+            <div style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:7}}>Requirements</div>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:10}}>
+              {[["Keeper","Keeper","=1"],["Batters","Batter","3–5"],["All-Rounders","AR","2–3"],["Bowlers","Bowler","2–5"]].map(function(row) {
+                const lbl=row[0], role=row[1], rng=row[2];
+                const n=roleCounts[role]||0;
+                const parts = rng==="=1"?[1,1]:rng.split("–").map(Number);
+                const ok = n>=parts[0] && n<=parts[1];
+                return (
+                  <div key={lbl} style={{background:ok?"#f0fff4":"#fff5f5",border:"1px solid "+(ok?"#9ae6b4":"#fed7d7"),borderRadius:6,padding:"6px 8px"}}>
+                    <div style={{fontSize:9.5,fontWeight:700,color:ok?"#276749":"#c53030",textTransform:"uppercase"}}>{lbl}</div>
+                    <div style={{fontSize:13,fontWeight:800,color:ok?"#276749":"#c53030"}}>{n+" "}<span style={{fontSize:9,opacity:.6}}>{"("+rng+")"}</span></div>
+                  </div>
+                );
+              })}
+            </div>
+
+
+            {errors.length>0 && sel.length>0 && (
+              <div style={{marginBottom:8}}>
+                {errors.map(function(e) { return <div key={e} style={{color:"#e53e3e",fontSize:12,fontWeight:600,marginBottom:2}}>{"⚠ "+e}</div>; })}
+              </div>
+            )}
+          </div>
+
+          <Btn full={true} disabled={!canSubmit} onClick={handleSubmit}>Confirm Team</Btn>
+          {!mgrName.trim() && <p style={{color:"#bbb",fontSize:11,textAlign:"center",marginTop:5}}>Enter your name above first</p>}
+        </div>
+      </div>
+    </div>
+  )}
+
+  {page==="teams" && (
+    <div>
+      <PageTop title={"All Teams — GW"+wk} />
+      {!open
+        ? <div style={{background:"#fff",margin:8,borderRadius:8,padding:40,textAlign:"center"}}><div style={{fontSize:34,marginBottom:11}}>🔒</div><div style={{fontWeight:700,fontSize:15,marginBottom:5}}>Teams are locked</div><div style={{color:"#888",fontSize:13}}>Visible after the Friday 8pm deadline.</div></div>
+        : subs.length===0
+          ? <div style={{background:"#fff",margin:8,borderRadius:8,padding:40,textAlign:"center",color:"#aaa"}}>No teams yet.</div>
+          : <div style={{display:"flex",flexDirection:"column",gap:7,padding:"7px 8px"}}>
+              {sorted.map(function(sub, rank) {
+                const tot=totalPts(sub), gw=gwPts(sub,wk), isOpen=expanded===sub.code;
+                return (
+                  <div key={sub.code} style={{background:"#fff",borderRadius:8,cursor:"pointer",border:rank===0?"2px solid #d4a017":"1px solid #eee"}} onClick={function(){setExpanded(isOpen?null:sub.code);}}>
+                    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 14px",flexWrap:"wrap",gap:7}}>
+                      <div style={{display:"flex",alignItems:"center",gap:11}}>
+                        <div style={{width:28,height:28,borderRadius:"50%",background:rank===0?"#d4a017":rank===1?"#a0aec0":rank===2?"#b7791f":"#eee",color:rank<3?"#fff":"#666",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:12}}>{rank+1}</div>
+                        <div><div style={{fontWeight:700,fontSize:15}}>{sub.mgrName}</div><div style={{color:"#999",fontSize:12}}>{'"'+sub.teamName+'"'}</div></div>
+                      </div>
+                      <div style={{display:"flex",gap:14,textAlign:"center",alignItems:"center"}}>
+                        <div><div style={{fontWeight:700,fontSize:15,color:PUR}}>{gw}</div><div style={{color:"#aaa",fontSize:10,fontWeight:600,textTransform:"uppercase"}}>{"GW"+wk}</div></div>
+                        <div><span className="ppill">{tot}</span><div style={{color:"#aaa",fontSize:10,fontWeight:600,textTransform:"uppercase",marginTop:3}}>pts</div></div>
+                        <span style={{color:"#ccc",fontSize:12}}>{isOpen?"▲":"▼"}</span>
+                      </div>
+                    </div>
+                    {isOpen && (
+                      <div style={{padding:"9px 14px 13px",borderTop:"1px solid #f5f5f5",display:"flex",flexWrap:"wrap",gap:5}}>
+                        {sub.players.map(function(sp) {
+                          const pl=PLAYERS.find(function(p){return p.id===sp.id;});
+                          if (!pl) return null;
+                          const st=stats[wk]&&stats[wk][sp.id];
+                          const pts2=calcPts(st,sp.cap,false);
+                          return (
+                            <div key={sp.id} style={{display:"flex",alignItems:"center",gap:5,background:"#f9f9f9",border:"1px solid #eee",borderRadius:5,padding:"4px 8px",fontSize:12}}>
+                              <RB role={pl.role} />
+                              <span style={{fontWeight:600,color:sp.cap?"#b7791f":"#1a1a1a"}}>{sp.cap?"(C) ":""}{pl.name}</span>
+                              {st && <span style={{color:"#276749",fontWeight:700,marginLeft:2}}>{"+"+pts2}</span>}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+      }
+    </div>
+  )}
+
+  {page==="table" && (
+    <div>
+      <PageTop title="League Table" />
+      {subs.length===0
+        ? <div style={{background:"#fff",margin:8,borderRadius:8,padding:40,textAlign:"center",color:"#aaa"}}>No entries yet.</div>
+        : <div style={{background:"#fff",margin:8,borderRadius:8,overflow:"hidden"}}>
+            <div className="ltrow" style={{gridTemplateColumns:"44px 1fr 66px 94px 58px",background:PUR}}>
+              {["","Manager","GW","Total","Best"].map(function(h,i) { return <span key={i} style={{fontSize:10,fontWeight:700,textTransform:"uppercase",letterSpacing:.7,color:"rgba(255,255,255,0.6)",textAlign:i===1?"left":"center"}}>{h}</span>; })}
+            </div>
+            {sorted.map(function(sub, rank) {
+              const tot=totalPts(sub), gw=gwPts(sub,wk);
+              const best=Math.max.apply(null, Array.from({length:wk},function(_,i){return gwPts(sub,i+1);}));
+              return (
+                <div key={sub.code} className="ltrow" style={{gridTemplateColumns:"44px 1fr 66px 94px 58px",background:rank===0?"#fffdf0":"#fff"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+                    <div style={{width:26,height:26,borderRadius:"50%",background:rank===0?"#d4a017":rank===1?"#a0aec0":rank===2?"#b7791f":"#eee",color:rank<3?"#fff":"#888",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,fontSize:12}}>{rank+1}</div>
+                  </div>
+                  <div><div style={{fontWeight:600,fontSize:14}}>{sub.mgrName}</div><div style={{color:"#aaa",fontSize:11}}>{'"'+sub.teamName+'"'}</div></div>
+                  <div style={{textAlign:"center",fontWeight:700,fontSize:16,color:PUR}}>{gw}</div>
+                  <div style={{textAlign:"center"}}><span className="ppill">{tot}</span></div>
+                  <div style={{textAlign:"center",color:"#888",fontSize:13,fontWeight:600}}>{best}</div>
+                </div>
+              );
+            })}
+          </div>
+      }
+    </div>
+  )}
+
+  {page==="fixtures" && (
+    <div>
+      <PageTop title="Fixtures 2026">
+        <a href={PCURL} target="_blank" rel="noreferrer" style={{background:PUR,color:"#fff",textDecoration:"none",borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:700}}>Play-Cricket →</a>
+      </PageTop>
+      {fx.length===0
+        ? <div style={{background:"#fff",margin:8,borderRadius:8,padding:40,textAlign:"center",color:"#aaa"}}>No fixtures yet.</div>
+        : <div style={{background:"#fff",margin:8,borderRadius:8,overflow:"hidden"}}>
+            {[...fx].sort(function(a,b){return new Date(a.date)-new Date(b.date);}).map(function(f) {
+              return (
+                <div key={f.id} className="fxrow">
+                  <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                    <TB team={f.team} />
+                    <span style={{fontWeight:600,fontSize:14}}>{f.home+" "}<span style={{color:"#aaa",fontWeight:400}}>vs</span>{" "+f.away}</span>
+                  </div>
+                  <div style={{textAlign:"right"}}>
+                    <div style={{color:"#888",fontSize:13}}>{new Date(f.date).toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}</div>
+                    {f.res && <div style={{fontWeight:700,fontSize:13,marginTop:2,color:f.res.startsWith("Won")?"#276749":"#c53030"}}>{f.res}</div>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+      }
+    </div>
+  )}
+
+  {page==="admin" && !aOpen && (
+    <div style={{maxWidth:290,margin:"60px auto",padding:"0 12px"}}>
+      <div style={{background:"#fff",borderRadius:8,padding:28,textAlign:"center"}}>
+        <div style={{fontSize:34,marginBottom:11}}>🔐</div>
+        <h3 style={{fontSize:17,fontWeight:700,color:PUR,marginBottom:14}}>Commissioner Login</h3>
+        <input type="password" className="inp" style={{textAlign:"center",marginBottom:10}} placeholder="Password" value={aPwd} onChange={function(e){setAPwd(e.target.value);}} onKeyDown={function(e){if(e.key==="Enter"&&aPwd===APWD)setAOpen(true);}} />
+        <button onClick={function(){if(aPwd===APWD)setAOpen(true);}} style={{width:"100%",background:PUR,color:"#fff",border:"none",borderRadius:8,padding:11,fontFamily:"inherit",fontSize:14,fontWeight:700,cursor:"pointer"}}>Unlock</button>
+      </div>
+    </div>
+  )}
+
+  {page==="admin" && aOpen && (
+    <div>
+      <div style={{background:PGRAD,padding:"15px 16px",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+        <span style={{fontSize:19,fontWeight:800,color:"#fff"}}>Commissioner</span>
+        <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>
+          {[["overview","Overview"],["stats","Stats"],["addfx","Fixtures"],["week","Week"]].map(function(pair) {
+            return <button key={pair[0]} className={"atab"+(aTab===pair[0]?" on":"")} onClick={function(){setATab(pair[0]);}}>{pair[1]}</button>;
+          })}
+        </div>
+      </div>
+
+      {aTab==="overview" && (
+        <div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:7,padding:"7px 8px 0"}}>
+            {[["Entries",subs.length],["GW",wk],["Teams",open?"Visible":"Hidden"]].map(function(pair) {
+              return (
+                <div key={pair[0]} style={{background:"#fff",borderRadius:7,padding:"13px 10px",textAlign:"center"}}>
+                  <div style={{fontSize:21,fontWeight:800,color:PUR}}>{pair[1]}</div>
+                  <div style={{fontSize:10,color:"#999",fontWeight:600,textTransform:"uppercase",letterSpacing:.7,marginTop:2}}>{pair[0]}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{background:"#fff",margin:"7px 8px",borderRadius:7,padding:14}}>
+            <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:9}}>Controls</p>
+            <div style={{display:"flex",gap:8,flexWrap:"wrap",alignItems:"center"}}>
+              <button onClick={function(){persist({...gs,open:!open});}} style={{background:open?"#fff":PUR,color:open?PUR:"#fff",border:"1.5px solid "+PUR,borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>{open?"🔒 Close":"🔓 Reveal Teams"}</button>
+              <div style={{display:"flex",alignItems:"center",gap:7,background:"#f5f5f5",border:"1px solid #eee",borderRadius:6,padding:"5px 10px"}}>
+                <span style={{color:"#888",fontSize:13,fontWeight:600}}>GW:</span>
+                <button onClick={function(){persist({...gs,wk:Math.max(1,wk-1)});}} style={{background:"#fff",color:PUR,border:"1.5px solid "+PUR,borderRadius:5,padding:"3px 9px",fontSize:13,fontFamily:"inherit",fontWeight:600,cursor:"pointer"}}>−</button>
+                <span style={{fontWeight:700,fontSize:16,minWidth:20,textAlign:"center",color:PUR}}>{wk}</span>
+                <button onClick={function(){persist({...gs,wk:wk+1});}} style={{background:PUR,color:"#fff",border:"none",borderRadius:5,padding:"4px 9px",fontSize:13,fontFamily:"inherit",fontWeight:600,cursor:"pointer"}}>+</button>
+              </div>
+              <button onClick={function(){if(window.confirm("Reset ALL data?")){persist(INIT);setAOpen(false);setPage("home");}}} style={{background:"#fff0f0",color:"#c53030",border:"1px solid #fed7d7",borderRadius:6,padding:"7px 12px",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:"inherit"}}>🗑 Reset</button>
+            </div>
+          </div>
+          <div style={{background:"#fff",margin:"0 8px 8px",borderRadius:7,padding:14}}>
+            <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:9}}>{"Submissions ("+subs.length+")"}</p>
+            {subs.length===0 ? <p style={{color:"#aaa",fontSize:13}}>None yet.</p> : subs.map(function(sub) {
+              return (
+                <div key={sub.code} style={{borderBottom:"1px solid #f5f5f5",paddingBottom:9,marginBottom:9}}>
+                  <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:4,marginBottom:5}}>
+                    <span style={{fontWeight:700}}>{sub.mgrName+" "}<span style={{color:"#aaa",fontWeight:500,fontSize:13}}>{'"'+sub.teamName+'"'}</span></span>
+                    <span style={{background:"#f3e8ff",color:PUR,borderRadius:4,padding:"2px 7px",fontSize:12,fontWeight:700}}>{sub.code}</span>
+                  </div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+                    {sub.players.map(function(sp) {
+                      const pl=PLAYERS.find(function(p){return p.id===sp.id;});
+                      return pl ? <span key={sp.id} style={{background:sp.cap?"#fffbeb":"#f7f7f7",color:sp.cap?"#b7791f":"#555",borderRadius:4,padding:"2px 7px",fontSize:11,fontWeight:600,border:"1px solid #eee"}}>{(sp.cap?"(C) ":"")+pl.name}</span> : null;
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {aTab==="stats" && (
+        <div style={{background:"#fff",margin:"7px 8px",borderRadius:7,padding:14}}>
+          <div style={{display:"flex",alignItems:"center",gap:9,marginBottom:13}}>
+            <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8}}>Gameweek:</p>
+            <select value={statsWk} onChange={function(e){setStatsWk(Number(e.target.value));}} style={{padding:"7px 10px",border:"1.5px solid #ddd",borderRadius:5,fontFamily:"inherit",fontSize:13,color:"#1a1a1a",outline:"none"}}>
+              {Array.from({length:20},function(_,i){return i+1;}).map(function(n){return <option key={n} value={n}>{"GW "+n}</option>;})}
+            </select>
+          </div>
+          <div style={{background:"#fffbeb",border:"1px solid #f6e05e",borderRadius:7,padding:12,marginBottom:13}}>
+            <h4 style={{color:"#744210",marginBottom:5,fontSize:13,fontWeight:700}}>🤖 AI Scorecard Parser</h4>
+            <p style={{color:"#744210",fontSize:12,marginBottom:8,opacity:.75}}>Paste scorecard text to auto-extract stats.</p>
+            <textarea value={aiText} onChange={function(e){setAiText(e.target.value);}} className="inp" placeholder={"Paste scorecard...\ne.g. W Kelly run out 75\nJ Abbott 13-4-38-5"} style={{minHeight:80,resize:"vertical",marginBottom:8}} />
+            <button onClick={parseAI} disabled={aiLoading} style={{background:"#00a854",color:"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>{aiLoading?"🔄 Parsing...":"🤖 Parse"}</button>
+            {aiResult && aiResult.length>0 && (
+              <div style={{marginTop:9}}>
+                <p style={{color:"#276749",fontSize:13,fontWeight:600,marginBottom:5}}>{"✅ Found "+aiResult.length+" player(s)"}</p>
+                <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:7}}>
+                  {aiResult.map(function(ps,i){return <span key={i} style={{background:"#f0fff4",border:"1px solid #9ae6b4",borderRadius:4,padding:"2px 7px",fontSize:11,color:"#276749",fontWeight:600}}>{ps.name+": "+(ps.r||0)+"r "+(ps.w||0)+"w"+(ps.duck?" 🦆":"")}</span>;})}
+                </div>
+                <button onClick={applyAI} style={{background:"#00a854",color:"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>✅ Apply Stats</button>
+              </div>
+            )}
+            {aiResult && aiResult.length===0 && <p style={{color:"#c53030",fontSize:12,marginTop:6,fontWeight:600}}>No players found.</p>}
+          </div>
+          <h4 style={{fontSize:13,fontWeight:700,marginBottom:9}}>{"Manual Entry — GW"+statsWk}</h4>
+          <div style={{overflowX:"auto"}}>
+            <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
+              <thead>
+                <tr style={{background:"#f7f7f7",borderBottom:"1px solid #eee"}}>
+                  {["Player","Team","DNP","Runs","Duck","Wkts","Cats","Stmps"].map(function(h){return <th key={h} style={{padding:"7px 6px",color:"#999",fontWeight:700,textAlign:"left",fontSize:10.5,textTransform:"uppercase",whiteSpace:"nowrap"}}>{h}</th>;})}
+                </tr>
+              </thead>
+              <tbody>
+                {PLAYERS.map(function(pl, i) {
+                  const s = statsEntry[pl.id]||{};
+                  const upd = function(f,v){setStatsEntry(function(prev){return {...prev,[pl.id]:{...(prev[pl.id]||{}),[f]:v}};});};
+                  const is = {width:48,padding:"3px 5px",borderRadius:4,border:"1px solid #ddd",background:"#fff",color:"#1a1a1a",fontSize:12,fontFamily:"inherit"};
+                  return (
+                    <tr key={pl.id} style={{background:i%2===0?"#fff":"#f9f9f9",borderBottom:"1px solid #f0f0f0"}}>
+                      <td style={{padding:"5px 6px",fontWeight:600,whiteSpace:"nowrap"}}>{pl.name}</td>
+                      <td style={{padding:"5px 6px"}}><TB team={pl.team} /></td>
+                      <td style={{padding:"5px 6px"}}><input type="checkbox" checked={!!s.dnp} onChange={function(e){upd("dnp",e.target.checked);}} /></td>
+                      <td style={{padding:"4px 3px"}}><input type="number" min="0" value={s.r||""} onChange={function(e){upd("r",Number(e.target.value));}} disabled={s.dnp} style={is} /></td>
+                      <td style={{padding:"5px 6px"}}><input type="checkbox" checked={!!s.duck} onChange={function(e){upd("duck",e.target.checked);}} disabled={s.dnp} /></td>
+                      <td style={{padding:"4px 3px"}}><input type="number" min="0" value={s.w||""} onChange={function(e){upd("w",Number(e.target.value));}} disabled={s.dnp} style={is} /></td>
+                      <td style={{padding:"4px 3px"}}><input type="number" min="0" value={s.c||""} onChange={function(e){upd("c",Number(e.target.value));}} disabled={s.dnp} style={is} /></td>
+                      <td style={{padding:"4px 3px"}}><input type="number" min="0" value={s.s||""} onChange={function(e){upd("s",Number(e.target.value));}} disabled={s.dnp} style={is} /></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <div style={{marginTop:11,display:"flex",gap:7}}>
+            <button onClick={function(){persist({...gs,stats:{...stats,[statsWk]:{...(stats[statsWk]||{}),...statsEntry}}});setStatsEntry({});alert("✅ GW"+statsWk+" saved!");}} style={{background:PUR,color:"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>{"Save GW"+statsWk}</button>
+            <button onClick={function(){setStatsEntry({});}} style={{background:"#fff",color:PUR,border:"1.5px solid "+PUR,borderRadius:6,padding:"7px 13px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>Clear</button>
+          </div>
+        </div>
+      )}
+
+      {aTab==="addfx" && (
+        <div>
+          <div style={{background:"#fff",margin:"7px 8px 0",borderRadius:7,padding:14}}>
+            <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:9}}>Add Fixture</p>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:7,marginBottom:8}}>
+              {[["Home","home"],["Away *","away"],["Date *","date"],["Team","team"]].map(function(pair) {
+                const lbl=pair[0], field=pair[1];
+                return (
+                  <div key={field}>
+                    <p style={{fontSize:10,fontWeight:700,color:"#999",marginBottom:4}}>{lbl}</p>
+                    {field==="team"
+                      ? <select className="inp" value={newFx.team} onChange={function(e){setNewFx({...newFx,team:e.target.value});}} style={{padding:"8px 9px"}}>{TEAMS.map(function(t){return <option key={t}>{t}</option>;})}</select>
+                      : <input type={field==="date"?"date":"text"} className="inp" value={newFx[field]} onChange={function(e){setNewFx({...newFx,[field]:e.target.value});}} placeholder={field==="away"?"Opponent":""} />
+                    }
+                  </div>
+                );
+              })}
+            </div>
+            <input className="inp" style={{marginBottom:8}} value={newFx.res} onChange={function(e){setNewFx({...newFx,res:e.target.value});}} placeholder="Result (optional)" />
+            <button onClick={function(){if(!newFx.away||!newFx.date)return;persist({...gs,fx:[...fx,{...newFx,id:Date.now()}]});setNewFx({home:"Baildon CC",away:"",date:"",team:"1st XI",res:""}); }} style={{background:PUR,color:"#fff",border:"none",borderRadius:6,padding:"8px 14px",fontFamily:"inherit",fontSize:13,fontWeight:600,cursor:"pointer"}}>+ Add</button>
+          </div>
+          <div style={{background:"#fff",margin:"7px 8px",borderRadius:7,padding:14}}>
+            <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:9}}>{"Existing ("+fx.length+")"}</p>
+            {fx.map(function(f) {
+              return (
+                <div key={f.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:"1px solid #f5f5f5",padding:"8px 0",flexWrap:"wrap",gap:5}}>
+                  <div style={{display:"flex",alignItems:"center",gap:7,flexWrap:"wrap"}}>
+                    <TB team={f.team} />
+                    <span style={{fontWeight:600,fontSize:13}}>{f.home+" vs "+f.away}</span>
+                    <span style={{color:"#aaa",fontSize:12}}>{new Date(f.date).toLocaleDateString("en-GB")}</span>
+                    {f.res && <span style={{fontWeight:700,fontSize:12,color:f.res.startsWith("Won")?"#276749":"#c53030"}}>{f.res}</span>}
+                  </div>
+                  <button onClick={function(){persist({...gs,fx:fx.filter(function(x){return x.id!==f.id;})});}} style={{background:"none",border:"none",color:"#e53e3e",cursor:"pointer",fontSize:17}}>×</button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {aTab==="week" && (
+        <div style={{background:"#fff",margin:"7px 8px",borderRadius:7,padding:14}}>
+          <p style={{fontSize:10,fontWeight:700,color:"#999",textTransform:"uppercase",letterSpacing:.8,marginBottom:11}}>{"GW"+wk+" Summary"}</p>
+          {subs.length===0 ? <p style={{color:"#aaa",fontSize:13}}>No entries yet.</p> : (
+            <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
+              <thead>
+                <tr style={{background:"#f7f7f7",borderBottom:"1px solid #eee"}}>
+                  {["Manager","Team","GW Pts","Total"].map(function(h){return <th key={h} style={{padding:"7px 9px",color:"#999",fontWeight:700,textAlign:"left",fontSize:10.5,textTransform:"uppercase"}}>{h}</th>;})}
+                </tr>
+              </thead>
+              <tbody>
+                {sorted.map(function(sub) {
+                  return (
+                    <tr key={sub.code} style={{borderBottom:"1px solid #f5f5f5"}}>
+                      <td style={{padding:"8px 9px",fontWeight:600}}>{sub.mgrName}</td>
+                      <td style={{padding:"8px 9px",color:"#aaa",fontSize:12}}>{'"'+sub.teamName+'"'}</td>
+                      <td style={{padding:"8px 9px",fontWeight:700,color:PUR,fontSize:16}}>{gwPts(sub,wk)}</td>
+                      <td style={{padding:"8px 9px"}}><span className="ppill">{totalPts(sub)}</span></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
+    </div>
+  )}
+</div>
+```
+
+);
+}
+
+
+  </script>
+</body>
+</html>
